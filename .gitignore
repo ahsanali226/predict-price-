@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.pkl
+.vscode/
+venv/
+env/
+.env
+static/images/hero.png

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EstateAI | Premium House Price Predictor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <img src="{{ url_for('static', filename='images/hero.png') }}" class="hero-bg" alt="Luxury House Background">
+    
+    <div class="container">
+        <div class="prediction-card">
+            <h1>EstateAI</h1>
+            <p class="subtitle">Advanced Machine Learning Property Valuation</p>
+            
+            <form action="/predict" method="POST">
+                <div class="form-group">
+                    <label for="square_feet">Area (Square Feet)</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="square_feet" name="square_feet" placeholder="e.g. 2500" required min="100">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bedrooms">Bedrooms</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="bedrooms" name="bedrooms" placeholder="e.g. 3" required min="1" max="10">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bathrooms">Bathrooms</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="bathrooms" name="bathrooms" placeholder="e.g. 2" required min="1" max="10">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-predict">Calculate Valuation</button>
+            </form>
+            
+            {% if prediction_text %}
+            <div class="result-section">
+                <p class="result-label">Estimated Market Value</p>
+                <h2 class="result-text">{{ prediction_text }}</h2>
+            </div>
+            {% endif %}
+            
+            <p class="footer-info">Powered by Advanced Regression Analysis</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
