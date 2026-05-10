@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EstateAI - Advanced Machine Learning Property Valuation System">
-    <meta name="keywords" content="house price prediction, real estate valuation, machine learning">
-    <meta name="author" content="Ahsan Ali">
     <title>EstateAI | Premium House Price Predictor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,106 +10,46 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <img src="{{ url_for('static', filename='images/hero.png') }}" class="hero-bg" alt="Luxury House Background">
+    
     <div class="container">
         <div class="prediction-card">
             <h1>EstateAI</h1>
             <p class="subtitle">Advanced Machine Learning Property Valuation</p>
             
-            <!-- Error/Success Alert -->
-            {% if prediction_text %}
-                {% if 'Error' in prediction_text or 'error' in prediction_text %}
-                    <div class="alert alert-error" role="alert">
-                        <span class="alert-icon">❌</span>
-                        <p>{{ prediction_text }}</p>
-                    </div>
-                {% else %}
-                    <div class="alert alert-success" role="alert">
-                        <span class="alert-icon">✅</span>
-                        <p>{{ prediction_text }}</p>
-                    </div>
-                {% endif %}
-            {% endif %}
-            
-            <!-- Prediction Form -->
-            <form action="/predict" method="POST" role="form" novalidate>
-                <!-- Square Feet Input -->
+            <form action="/predict" method="POST">
                 <div class="form-group">
-                    <label for="square_feet">
-                        <span class="icon">🏠</span>
-                        Area (Square Feet)
-                    </label>
+                    <label for="square_feet">Area (Square Feet)</label>
                     <div class="input-wrapper">
-                        <input 
-                            type="number" 
-                            id="square_feet" 
-                            name="square_feet" 
-                            placeholder="e.g. 2500" 
-                            required 
-                            min="100" 
-                            max="100000"
-                            step="100"
-                            aria-label="Property area in square feet"
-                            aria-describedby="square_feet_hint"
-                        >
-                        <small id="square_feet_hint" class="input-hint">Between 100 - 100,000 sq ft</small>
+                        <input type="number" id="square_feet" name="square_feet" placeholder="e.g. 2500" required min="100">
                     </div>
                 </div>
                 
-                <!-- Bedrooms Input -->
                 <div class="form-group">
-                    <label for="bedrooms">
-                        <span class="icon">🛏️</span>
-                        Bedrooms
-                    </label>
+                    <label for="bedrooms">Bedrooms</label>
                     <div class="input-wrapper">
-                        <input 
-                            type="number" 
-                            id="bedrooms" 
-                            name="bedrooms" 
-                            placeholder="e.g. 3" 
-                            required 
-                            min="1" 
-                            max="10"
-                            step="1"
-                            aria-label="Number of bedrooms"
-                            aria-describedby="bedrooms_hint"
-                        >
-                        <small id="bedrooms_hint" class="input-hint">Between 1 - 10</small>
+                        <input type="number" id="bedrooms" name="bedrooms" placeholder="e.g. 3" required min="1" max="10">
                     </div>
                 </div>
                 
-                <!-- Bathrooms Input -->
                 <div class="form-group">
-                    <label for="bathrooms">
-                        <span class="icon">🚿</span>
-                        Bathrooms
-                    </label>
+                    <label for="bathrooms">Bathrooms</label>
                     <div class="input-wrapper">
-                        <input 
-                            type="number" 
-                            id="bathrooms" 
-                            name="bathrooms" 
-                            placeholder="e.g. 2" 
-                            required 
-                            min="1" 
-                            max="10"
-                            step="0.5"
-                            aria-label="Number of bathrooms"
-                            aria-describedby="bathrooms_hint"
-                        >
-                        <small id="bathrooms_hint" class="input-hint">Between 1 - 10</small>
+                        <input type="number" id="bathrooms" name="bathrooms" placeholder="e.g. 2" required min="1" max="10">
                     </div>
                 </div>
                 
-                <!-- Submit Button -->
-                <button type="submit" class="btn-predict" aria-label="Calculate property valuation">
-                    <span>💰</span>
-                    <span>Calculate Valuation</span>
-                </button>
+                <button type="submit" class="btn-predict">Calculate Valuation</button>
             </form>
             
-            <!-- Footer -->
-            <p class="footer-info">Powered by Advanced Regression Analysis | EstateAI v1.0</p>
+            {% if prediction_text %}
+            <div class="result-section">
+                <p class="result-label">Estimated Market Value</p>
+                <h2 class="result-text">{{ prediction_text }}</h2>
+            </div>
+            {% endif %}
+            
+            <p class="footer-info">Powered by Advanced Regression Analysis</p>
         </div>
     </div>
 
